@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  postrgres_db:
+    image: postgres:latest
+    container_name: postrgres_container
+    restart: always
+    environment:
+      - POSTGRES_USER=postrgres
+      - POSTGRES_PASSWORD=postrgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_db:/var/lib/postgresql/data:delegated
+
+  local_driving_school:
+    build: driving_school
+    hostname: local_driving_school
+    container_name: local_driving_school
+    volumes:
+      - ./driving_school/sites-enabled:/etc/apache2/sites-enabled:cached
+      - ./../:/var/www/driving_school:cached
+    ports:
+      - "127.0.0.99:80:80"
+      - "127.0.0.99:443:443"
+    depends_on:
+      - postrgres_db
+
+volumes:
+  postgres_db:
+    driver: local

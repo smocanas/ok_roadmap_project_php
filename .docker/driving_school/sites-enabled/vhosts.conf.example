@@ -1,0 +1,20 @@
+<VirtualHost *:80>
+    ServerName driving-school.domain
+
+    DocumentRoot /var/www/driving_school/public
+    DirectoryIndex /index.php
+
+    <Directory /var/www/driving_school/public>
+        AllowOverride None
+        Order Allow,Deny
+        Allow from All
+
+        FallbackResource /index.php
+    </Directory>
+
+    <Directory /var/www/driving_school/public/bundles>
+        FallbackResource disabled
+    </Directory>
+    ErrorLog /var/log/apache2/error.log
+    CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
