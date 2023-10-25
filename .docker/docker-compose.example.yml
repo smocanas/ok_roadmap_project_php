@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  postrgres_db:
+  postgres_db:
     image: postgres:latest
     container_name: postrgres_container
     restart: always
@@ -23,7 +23,7 @@ services:
       - "127.0.0.99:80:80"
       - "127.0.0.99:443:443"
     depends_on:
-      - postrgres_db
+      - postgres_db
 
 volumes:
   postgres_db:
