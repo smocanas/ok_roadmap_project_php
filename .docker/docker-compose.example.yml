@@ -2,11 +2,11 @@ version: "3.8"
 services:
   postgres_db:
     image: postgres:latest
-    container_name: postrgres_container
+    container_name: postgres_container
     restart: always
     environment:
-      - POSTGRES_USER=postrgres
-      - POSTGRES_PASSWORD=postrgres123
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
     ports:
       - "5432:5432"
     volumes:
