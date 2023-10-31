@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+    postgres_db:
+        image: postgres:latest
+        container_name: postgres_container
+        restart: always
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        ports:
+            - "5432:5432"
+        volumes:
+            - symfony_app_postgres_db:/var/lib/postgresql/data:delegated
+        networks:
+            - symfony_app
+    php:
+        build:
+            context: ./php
+            args:
+                TIMEZONE: ${TIMEZONE}
+        volumes:
+            - ../../:/var/www/driving-school:cached
+            - symfony_app_var:/var/www/driving-school/var
+            - symfony_app_vendor:/var/www/driving-school/vendor
+        networks:
+            - symfony_app
+    nginx:
+        build:
+            context: ./nginx
+        volumes:
+            - ../../:/var/www/driving-school:cached
+            - symfony_app_var:/var/www/driving-school/var
+            - symfony_app_vendor:/var/www/driving-school/vendor
+        ports:
+            - "80:80"
+        networks:
+            - symfony_app
+        env_file:
+            - .env.nginx.local
+
+volumes:
+    symfony_app_var:
+    symfony_app_vendor:
+    symfony_app_postgres_db:
+
+networks:
+    symfony_app:
