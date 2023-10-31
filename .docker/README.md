@@ -8,5 +8,5 @@
 
 1. Go to `.docker/driving-school/`
 2. Run `docker-compose build` in order to build the all containers. (or you can skip to point nr.3 if you don't need explicit information about the build, this point will be done automatically also)
-2. Run `docker-compose up` in order to start all containers. Use `-d` parameter if you prefer detached mode.
-3. Go inside the php container using `docker-compose exec php bash` and run the `composer install` command.
+3. Run `docker-compose up` in order to start all containers. Use `-d` parameter if you prefer detached mode.
+4. Go inside the php container using `docker-compose exec php bash` and run the `composer install` command.
