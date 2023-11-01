@@ -1,4 +1,3 @@
 # ok_roadmap_project_php
-ok_roadmap_project_php
 
-project init
+#### For docker configuration `README.md` file click [here](.docker/README.md).
